@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRoute</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="phone-wrapper">
+
+        <!-- the header with our app name -->
+        <header class="global-header">
+            <div class="logo">EcoRoute 🌿</div>
+        </header>
+
+        <main class="app-container">
+
+            <!-- 1. letting users create an account or sign in -->
+            <section id="account-view" class="view">
+                <h2 id="account-title">Create Your Account 🌿</h2>
+                <p class="subtitle" id="account-description">
+                    Enter your name and create a password.
+                </p>
+
+                <div class="profile-card">
+                    <div class="avatar">👤</div>
+
+                    <label for="account-name">Your Name</label>
+                    <input id="account-name" class="donation-input"
+                           type="text" autocomplete="username">
+
+                    <label for="account-password">Password</label>
+                    <input id="account-password" class="donation-input"
+                           type="password" autocomplete="new-password">
+
+                    <button id="account-submit" class="finish-donation-btn">
+                        Create Account
+                    </button>
+
+                    <p id="account-message" class="subtitle"></p>
+
+                    <button id="switch-account" class="back-btn">
+                        Already have an account? Sign In
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- 2. the home page where users can see their progress -->
+            <section id="home-view" class="view hidden">
+                <h2 id="welcome-message">Welcome Back!</h2>
+                <p class="subtitle">
+                    Track your footprint and route your items sustainably.
+                </p>
+
+                <!-- showing how many items users have donated and recycled -->
+                <div class="stats-card">
+                    <h3>Your Impact 📊</h3>
+
+                    <div class="stats-grid">
+                        <div>
+                            <strong id="total-donated">0</strong>
+                            <p>Items Donated</p>
+                        </div>
+
+                        <div>
+                            <strong id="total-recycled">0</strong>
+                            <p>Items Recycled</p>
+                        </div>
+                    </div>
+
+                    <!-- showing the total weight of their items -->
+                    <div class="stats-grid">
+                        <div>
+                            <strong id="donated-weight">0.00 lbs</strong>
+                            <p>Donated Weight</p>
+                        </div>
+
+                        <div>
+                            <strong id="recycled-weight">0.00 lbs</strong>
+                            <p>Recycled Weight</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- showing their past recycling and donation activities -->
+                <h3 class="impact-heading">Your Recent Impact 🌱</h3>
+                <div id="impact-activity"></div>
+            </section>
+
+
+            <!-- 3. the search page where users enter their items -->
+            <section id="actions-view" class="view hidden">
+                <h2>Search an Item</h2>
+                <p class="subtitle">
+                    Not sure what to do with an item? Start here!
+                </p>
+
+                <!-- our quick guide to explain the three options -->
+                <div class="user-guide">
+                    <h3>🌿 Quick Guide</h3>
+                    <p>
+                        Here are three ways to give your items a better future:
+                    </p>
+
+                    <div class="guide-item">
+                        <strong>🎨 Reuse</strong>
+                        <p>
+                            Use an item again or turn it into something new.
+                            Example: Make a planter from an old bottle.
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <strong>♻️ Recycle</strong>
+                        <p>
+                            Send materials to be processed into new products.
+                            Example: Recycle an empty aluminum can.
+                        </p>
+                    </div>
+
+                    <div class="guide-item">
+                        <strong>🤝 Donate</strong>
+                        <p>
+                            Give usable items to someone who can use them.
+                            Example: Donate clothes you no longer wear.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- the search bar for typing in an item -->
+                <div class="search-box">
+                    <input id="item-search" type="text"
+                           placeholder="e.g., Plastic bottle, laptop, jeans...">
+
+                    <button id="search-btn">Search</button>
+                </div>
+            </section>
+
+
+            <!-- 4. letting users choose the material of their item -->
+            <section id="material-view" class="view hidden">
+                <button id="back-to-search" class="back-btn">
+                    ← Back
+                </button>
+
+                <h2>What Is Your Item Made Of?</h2>
+                <p class="subtitle" id="material-item-text"></p>
+
+                <!-- the different materials users can choose from -->
+                <div id="material-fallback-box">
+                    <div class="material-grid">
+                        <button class="mat-choice-btn" data-material="plastic">
+                            Plastic
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="electronics">
+                            Electronics
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="fabric">
+                            Clothing
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="paint">
+                            Paint
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="batteries">
+                            Batteries
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="metal">
+                            Metal
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="glass">
+                            Glass
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="rubber">
+                            Rubber / Tires
+                        </button>
+
+                        <button class="mat-choice-btn" data-material="chemicals">
+                            Chemicals / Hazardous
+                        </button>
+
+                        <button class="mat-choice-btn not-sure-btn" data-material="unknown">
+                            ❓ Not Sure
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 5. letting users choose how they want to handle their item -->
+            <section id="pathway-view" class="view hidden">
+                <button id="back-to-materials" class="back-btn">
+                    ← Back
+                </button>
+
+                <h2>Choose Your Green Pathway 🌿</h2>
+                <p class="subtitle" id="selected-item-text"></p>
+
+                <!-- users can choose to reuse, recycle, or donate -->
+                <div class="pathway-buttons">
+                    <button id="choose-reuse" class="path-btn">
+                        🎨 DIY / Reuse Ideas
+                    </button>
+
+                    <button id="choose-recycle" class="path-btn">
+                        ♻️ Find Recycling Locations
+                    </button>
+
+                    <button id="choose-donate" class="path-btn">
+                        🤝 Donation / Drop-Off Locations
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- 6. showing results based on what the user chooses -->
+            <section id="details-view" class="view hidden">
+                <button id="back-to-pathways" class="back-btn">
+                    ← Back
+                </button>
+
+                <h2 id="details-title">Your Green Pathway</h2>
+
+                <!-- javascript adds the results and locations here -->
+                <div id="details-content"></div>
+            </section>
+
+
+            <!-- 7. letting users record their recycling or donation -->
+            <section id="finish-activity-view" class="view hidden">
+                <button id="back-to-locations" class="back-btn">
+                    ← Back to Locations
+                </button>
+
+                <h2 id="finish-title">Finish Your Activity 🌱</h2>
+                <p class="subtitle">
+                    Record items after you have recycled or donated them.
+                </p>
+
+                <div class="result-card">
+                    <h3 id="activity-item-name">Your Item</h3>
+
+                    <!-- users enter how many items they recycled or donated -->
+                    <label for="activity-quantity">Number of Items</label>
+                    <input id="activity-quantity" class="donation-input"
+                           type="number" min="1" step="1" value="1">
+
+                    <!-- users can also enter the weight if they know it -->
+                    <label for="activity-weight">Total Weight (lbs)</label>
+                    <input id="activity-weight" class="donation-input"
+                           type="number" min="0" step="0.01"
+                           placeholder="Optional">
+
+                    <p class="subtitle">
+                        Leave the weight blank if you don't know it.
+                    </p>
+
+                    <button id="confirm-activity-btn" class="finish-donation-btn">
+                        ✓ Finish
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- 8. the profile page with the user's account information -->
+            <section id="profile-view" class="view hidden">
+                <h2>Your Profile</h2>
+
+                <div class="profile-card">
+                    <div class="avatar">👤</div>
+                    <h3 id="profile-name">EcoRoute User</h3>
+
+                    <p class="subtitle">
+                        Your recycling and donation history is saved in this browser.
+                    </p>
+
+                    <button id="signout-btn" class="login-btn">
+                        Sign Out
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+
+        <!-- 9. the navigation bar to move between the main pages -->
+        <nav id="bottom-nav" class="global-nav hidden">
+            <button class="nav-item active" data-target="home-view">
+                <span class="icon">🏠</span>
+                <span class="label">Home</span>
+            </button>
+
+            <button class="nav-item" data-target="actions-view">
+                <span class="icon">🔍</span>
+                <span class="label">Actions</span>
+            </button>
+
+            <button class="nav-item" data-target="profile-view">
+                <span class="icon">👤</span>
+                <span class="label">Profile</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- connecting our javascript so the buttons and pages work -->
+    <script src="script.js"></script>
+</body>
+
+</html>
