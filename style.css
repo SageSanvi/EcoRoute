@@ -1,0 +1,612 @@
+/* 1. setting up the main page */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #dceef5;
+}
+
+/* this makes our app look like a phone */
+.phone-wrapper {
+    width: 390px;
+    max-width: 100%;
+    height: 780px;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 22px;
+    background-color: #f8fcff;
+    box-shadow: 0 5px 20px #a4c7d5;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* 2. the header at the top of our app */
+
+.global-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 25px 20px;
+    background-color: #10567f;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.settings-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2784a9;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.settings-btn:hover {
+    background-color: #1b7397;
+}
+
+
+/* 3. styling the content inside each page */
+
+.app-container {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 25px 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #10567f;
+    font-size: 26px;
+}
+
+h3 {
+    color: #187b61;
+    font-size: 19px;
+}
+
+.subtitle {
+    color: #597889;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+button {
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
+
+
+/* 4. showing the user's progress on the home page */
+
+.stats-card {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #d2e7f0;
+    border-radius: 18px;
+    background-color: white;
+    box-shadow: 0 3px 10px #d9e9ee;
+}
+
+.stats-card h3 {
+    margin-top: 0;
+    color: #10567f;
+    text-align: center;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.stats-grid div {
+    flex: 1;
+    min-width: 0;
+    padding: 18px 6px;
+    border-radius: 12px;
+    background-color: #e2f3fa;
+    text-align: center;
+}
+
+.stats-grid div:nth-child(2) {
+    background-color: #e4f5e9;
+}
+
+.stats-grid strong {
+    display: block;
+    color: #10567f;
+    font-size: 21px;
+    overflow-wrap: anywhere;
+}
+
+.stats-grid div:nth-child(2) strong {
+    color: #23864c;
+}
+
+.stats-grid p {
+    margin-bottom: 0;
+    color: #567481;
+    font-size: 13px;
+}
+
+.impact-heading {
+    margin-top: 30px;
+}
+
+
+/* 5. showing the user's past recycling and donations */
+
+.impact-notification {
+    margin-top: 12px;
+    padding: 16px;
+    border: 1px solid #d2e7f0;
+    border-left: 5px solid #159b77;
+    border-radius: 12px;
+    background-color: white;
+    color: #24556b;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    box-shadow: 0 2px 8px #d9e9ee;
+}
+
+.impact-notification strong {
+    color: #10567f;
+    font-size: 15px;
+}
+
+.impact-notification p {
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.impact-notification small {
+    color: #829aa5;
+}
+
+
+/* 6. the search bar where users enter their items */
+
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+#item-search,
+.donation-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #a7ccdc;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 14px;
+}
+
+#item-search:focus,
+.donation-input:focus {
+    outline: 2px solid #10567f;
+    outline-offset: 1px;
+}
+
+#search-btn,
+.location-btn {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #159b77;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#search-btn:hover,
+.location-btn:hover {
+    background-color: #10795d;
+}
+
+
+/* 7. letting users choose what their item is made of */
+
+#material-fallback-box {
+    margin-top: 20px;
+}
+
+.material-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.mat-choice-btn {
+    min-height: 45px;
+    padding: 12px 8px;
+    border: 1px solid #10567f;
+    border-radius: 8px;
+    background-color: white;
+    color: #10567f;
+    font-size: 13px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.mat-choice-btn:hover {
+    border-color: #159b77;
+    background-color: #e6f5ee;
+}
+
+.not-sure-btn {
+    grid-column: 1 / -1;
+    border: 2px solid #159b77;
+    background-color: #e6f5ee;
+}
+
+.not-sure-btn:hover {
+    background-color: #d4edd9;
+}
+
+
+/* 8. back buttons to return to the previous page */
+
+.back-btn {
+    margin-bottom: 15px;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    color: #10567f;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    color: #159b77;
+}
+
+
+/* 9. letting users choose between reuse, recycling, and donation */
+
+.pathway-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.path-btn {
+    width: 100%;
+    padding: 17px;
+    border: 1px solid #b9dce5;
+    border-left: 5px solid #159b77;
+    border-radius: 10px;
+    background-color: white;
+    color: #10567f;
+    text-align: left;
+    font-size: 15px;
+}
+
+.path-btn:nth-child(2) {
+    border-left-color: #10567f;
+}
+
+.path-btn:hover {
+    background-color: #e6f6f0;
+}
+
+
+/* 10. showing results and recycling locations */
+
+.result-card {
+    margin-top: 20px;
+    padding: 18px;
+    border: 1px solid #c3e2ed;
+    border-left: 5px solid #159b77;
+    border-radius: 12px;
+    background-color: #eef9f1;
+    color: #24556b;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.result-card h3 {
+    margin-top: 0;
+    color: #10567f;
+}
+
+.result-card h4 {
+    margin-bottom: 10px;
+    color: #187b61;
+}
+
+.result-card ul {
+    padding-left: 20px;
+}
+
+.result-card li {
+    margin-bottom: 10px;
+}
+
+.result-card p {
+    font-size: 14px;
+}
+
+.facility-warning {
+    margin-top: 15px;
+    color: #597889;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.location-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+/* 11. letting users record their recycling or donation */
+
+.finish-donation-btn {
+    display: block;
+    width: 100%;
+    margin-top: 22px;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #10567f;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.finish-donation-btn:hover {
+    background-color: #0b4263;
+}
+
+#finish-activity-view label {
+    display: block;
+    margin-top: 15px;
+    color: #10567f;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#finish-activity-view .donation-input {
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+#activity-item-name {
+    margin-bottom: 20px;
+}
+
+
+/* 12. the user's profile page */
+
+.profile-card {
+    margin-top: 30px;
+    padding: 35px 20px;
+    border-radius: 18px;
+    background-color: #eaf6fa;
+    text-align: center;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 55px;
+}
+
+.profile-card .subtitle {
+    margin-top: 18px;
+}
+
+.login-btn {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 10px;
+    background-color: #10567f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background-color: #0b4263;
+}
+
+#signout-btn {
+    margin-top: 18px;
+}
+
+
+/* 13. creating an account or signing in */
+
+#account-view .profile-card {
+    margin-top: 25px;
+    padding: 25px 20px;
+}
+
+#account-view label {
+    display: block;
+    margin-top: 15px;
+    color: #10567f;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#account-view .donation-input {
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+#account-view .avatar {
+    margin-bottom: 15px;
+}
+
+#account-message {
+    margin-top: 15px;
+    color: #10567f;
+    text-align: center;
+}
+
+#switch-account {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+#account-view .finish-donation-btn {
+    margin-top: 20px;
+}
+
+
+/* 14. navigation buttons at the bottom of the app */
+
+.global-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 15px 10px;
+    border-top: 1px solid #d2e7f0;
+    background-color: white;
+}
+
+.nav-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: none;
+    color: #829aa5;
+}
+
+.nav-item .icon {
+    font-size: 23px;
+}
+
+.nav-item .label {
+    font-size: 12px;
+}
+
+.nav-item.active {
+    color: #159b77;
+    font-weight: bold;
+}
+
+.nav-item:hover {
+    color: #10567f;
+}
+
+
+/* 15. making sure our app fits on smaller screens */
+
+@media (max-width: 450px) {
+    .phone-wrapper {
+        width: 100%;
+        height: 100dvh;
+        max-height: none;
+        border-radius: 0;
+    }
+
+    .app-container {
+        padding: 20px 15px;
+    }
+
+    .global-header {
+        padding: 20px 15px;
+    }
+
+    .global-nav {
+        padding: 12px 8px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .stats-grid strong {
+        font-size: 19px;
+    }
+}
+
+
+/* 16. our quick guide to help users understand their options */
+
+.user-guide {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #c3e2ed;
+    border-radius: 14px;
+    background-color: #eef8fc;
+}
+
+.user-guide h3 {
+    margin: 0 0 8px;
+    color: #10567f;
+    font-size: 18px;
+}
+
+.user-guide > p {
+    color: #597889;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.guide-item {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-left: 4px solid #159b77;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.guide-item strong {
+    color: #10567f;
+    font-size: 14px;
+}
+
+.guide-item p {
+    margin: 5px 0 0;
+    color: #597889;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+#actions-view .search-box {
+    margin-top: 20px;
+}
